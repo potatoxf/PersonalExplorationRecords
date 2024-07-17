@@ -1,0 +1,2 @@
+# PersonalExplorationRecords
+个人对计算机内容探索学习记录整理，包括语言包括但不限于java、javascript、python等，其它包括linux、docker等内容
