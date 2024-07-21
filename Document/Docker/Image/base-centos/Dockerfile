@@ -36,7 +36,6 @@ echo "alias ls='ls --color=auto'">> /etc/profile.d/start-init.sh &&\
 echo "alias ll='ls -al'">> /etc/profile.d/start-init.sh &&\
 echo "/usr/sbin/sshd -D">> /etc/profile.d/start-init.sh &&\
 chmod 755 /etc/profile.d/start-init.sh &&\
-source /etc/profile &&\
 echo 'root:root' | chpasswd &&\
 yum clean all
 
