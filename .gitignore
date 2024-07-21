@@ -28,11 +28,37 @@ caches/
 .idea/
 .vscode/
 .setting/
+.settings/
+.myeclipse/
+.project/
+.classpath/
+.factorypath/
+.classpath
+.project
+.mymetadata
 *.iml
 *.ipr
+*.iws
+
+#处理上传文件夹
+upload/
+uploads/
+
+#压缩文件
+*.tar.gz
+*.war
+*.nar
+*.ear
+*.zip
+*.rar
+
+# Run
+*.dll
+*.exe
 
 #Java
 *.class
+*.jar
 
 #Python
 __pycache__/
