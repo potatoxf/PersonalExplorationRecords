@@ -51,10 +51,12 @@ uploads/
 *.ear
 *.zip
 *.rar
+*.7z
 
-# Run
+#软件
 *.dll
 *.exe
+*.rpm
 
 #Java
 *.class
