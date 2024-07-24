@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT students (student+)>                      <!--students有1-N个person元素-->
+<!ELEMENT student (name, age, contact,br*)>         <!--student元素下有name,age,contact,br这些子元素-->
+<!ELEMENT name (#PCDATA)>                           <!--name为文本元素-->
+<!ELEMENT age (#PCDATA)>                            <!--age为文本元素-->
+<!ELEMENT contact (phone|email*)>                   <!--contact下面可以有phone元素或者email元素-->
+<!ELEMENT phone (#PCDATA)>                          <!--phone为文本元素-->
+<!ELEMENT email (#PCDATA)>                          <!--email为文本元素-->
+<!ELEMENT br EMPTY>                                 <!--br为空元素-->
+
+
+<!--属性描述代码实操-->
+<!ATTLIST student no ID #REQUIRED>                  <!--student中的no属性-->
+<!ATTLIST student gender (男|女) "男">               <!--student中的gender枚举属性-->
+<!ATTLIST student qq CDATA #IMPLIED>                <!--student中的qq文本属性-->
+

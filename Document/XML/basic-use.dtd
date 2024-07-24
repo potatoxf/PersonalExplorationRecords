@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+1.什么是DTD
+DTD的全称为Document Type Definition，是一种文件定义格式。DTD规定了XML文件结构为XML文件提供了语法与规则。
+在DTD中定义XML文件的结构，然后按照DTD的声明来编写XML文件。就好像编程语言中的函数定义，在使用函数时要根据函数声明的格式进行来引用。
+PS：简而言之，DTD就是用来约束XML文档的，使其在一定的规范下使用，除了DTD技术外，还有Schema技术，也是用于约束XML文档的。
+
+2.DTD声明
+
+在XML中加入DTD声明：
+    <!DOCTYPE root[
+    ...
+    <!ATTLIST root
+    ...
+    >
+    ]>
+
+在DTD中声明：
+<!ELEMENT 元素名称 元素格式>
+<!ATTLIST 元素名称 属性名称 属性类型 属性描述>
+
+3.dtd元素定义格式如下：
+<!ELEMENT 元素名称 元素格式>
+元素名称：自定义的名称
+元素格式：描述元素内的内容，元素名称、符号、次数组合成复杂元素格式
+    EMPTY       空格式
+    (#PCDATA)   文本格式
+    符号
+        ,   与
+        |   或
+    次数
+        ?   0或1
+        *   0-N
+        +   1-N
+
+4.dtd属性定义格式如下：
+<!ATTLIST 元素名称 属性名称 属性类型 属性描述>
+元素名称：已定义元素的名称
+属性类型
+    ID              给节点赋一个id号，id号不可以重复
+    CDATA           文本型
+    IDREF           引用类型,输入需要引用的元素的ID
+    (ENUM1|ENUM2)   枚举类型，选择其一
+属性描述
+    #REQUIRED       必填
+    #IMPLED         非必填
+    "DEFAULT"       只有枚举类型时，描述才可以用默认值
+-->
+
+<!ELEMENT EmptyElementName EMPTY>
+<!--空元素：<EmptyElementName/>
+什么是为空元素？没有内容的标签就被称为空元素。如：
+<br/>
+<hr/>
+<input/>
+-->
+
+<!ELEMENT TextElementName (#PCDATA)>
+<!--文本元素：<TextElementName>text</TextElementName>
+所谓文本元素，就是在该标签体中可以放入文本型的数据。如：
+<p>text</p>
+-->
+
+<!ELEMENT BlendedElementName (SingleElementName,LittleElementName?,OneMoreElementName+,ZeroMoreElementName*)>
+<!ATTLIST BlendedElementName id ID #REQUIRED>
+<!ATTLIST BlendedElementName pid IDREF #IMPLIED>
+<!ATTLIST BlendedElementName name CDATA #REQUIRED>
+<!ATTLIST BlendedElementName enums (Enum1|Enum2) Enum1>
+
+<!--混合元素
+混合元素指的是该元素下面还有别的子元素。
+<BlendedElementName id="" pid="" name="" enums="Enum1">...</BlendedElementName>
+例如：
+SingleElementName：必须要有这个元素
+LittleElementName?：最多有一个这个元素
+OneMoreElementName+：至少有一个这个元素
+ZeroMoreElementName*：至少有零个个这个元素
+
+这些元素可以是文本、混合、空元素。
+
+-->
+<!ELEMENT SingleElementName (#PCDATA)>
+<!ELEMENT LittleElementName (#PCDATA)>
+<!ELEMENT OneMoreElementName (#PCDATA)>
+<!ELEMENT ZeroMoreElementName (#PCDATA)>
+
+
+
+

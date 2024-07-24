@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+<?xml-stylesheet type="text/css" href="引用css文件"?>
+-->
+<!--
+    version,版本
+    encoding,编码
+-->
+<students>
+    <!--注释-->
+    <!--注释内容-->
+
+    <!--空标签-->
+    <student/>
+    <!--带属性空标签-->
+    <student no="学号"/>
+    <student name="姓名"/>
+    <student age="年龄"/>
+    <student gender="性别"/>
+    <student no="学号" name="姓名" age="年龄" gender="性别"/>
+
+    <!--非空标签，且带有属性-->
+    <student no="学号">
+        <name>姓名</name>
+        <age>年龄</age>
+        <gender>性别</gender>
+        <!--特殊文本段-->
+        <![CDATA[
+            可以是内容特殊字符文本内容
+	    ]]>
+    </student>
+</students>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE students[
+        <!ELEMENT students (student+)>              <!--persons有1-N个person元素-->
+        <!ELEMENT student (name,age,contact,br*)>   <!--person元素下有name,age,contact,br这些子元素-->
+        <!ELEMENT name (#PCDATA)>                   <!--name为文本元素-->
+        <!ELEMENT age (#PCDATA)>                    <!--age为文本元素-->
+        <!ELEMENT contact (phone|email*)>           <!--contact下面可以有phone元素或者email元素-->
+        <!ELEMENT phone (#PCDATA)>                  <!--phone为文本元素-->
+        <!ELEMENT email (#PCDATA)>                  <!--email为文本元素-->
+        <!ELEMENT br EMPTY>                         <!--br为空元素-->
+        <!--属性描述代码实操-->
+        <!ATTLIST student no ID #REQUIRED>
+        <!ATTLIST student gender (男|女) "男">
+        <!ATTLIST student qq CDATA #IMPLIED>
+        ]>
+<students>
+    <student no="NO20200722" gender="女" qq="123456789">
+        <name>张小红</name>
+        <age>18</age>
+        <contact>
+            <phone>123456789</phone>
+        </contact>
+        <br/>
+    </student>
+    <student no="NO20200723" gender="男">
+        <name>张大明</name>
+        <age>22</age>
+        <contact>
+            <email>123456789@qq.com</email>
+            <email>987654321@qq.com</email>
+        </contact>
+        <br/>
+    </student>
+</students>

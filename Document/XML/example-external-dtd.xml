@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+<!DOCTYPE 根元素 SYSTEM "引用本地dtd文件">
+-->
+<!DOCTYPE students SYSTEM "example-external-dtd.dtd">
+<students>
+    <student no="NO20200722" gender="女" qq="123456789">
+        <name>张小红</name>
+        <age>18</age>
+        <contact>
+            <phone>123456789</phone>
+        </contact>
+        <br/>
+    </student>
+    <student no="NO20200723" gender="男">
+        <name>张大明</name>
+        <age>22</age>
+        <contact>
+            <email>123456789@qq.com</email>
+            <email>987654321@qq.com</email>
+        </contact>
+        <br/>
+    </student>
+</students>
