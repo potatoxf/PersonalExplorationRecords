@@ -5,6 +5,7 @@ MAINTAINER "potatoxf <potato.xf@qq.com>"
 USER root
 
 RUN \
+echo "base-centos">/etc/hostname &&\
 curl -o /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo &&\
 yum clean all && yum makecache yum update &&\
 yum install -y kde-l10n-Chinese glibc-common &&\
