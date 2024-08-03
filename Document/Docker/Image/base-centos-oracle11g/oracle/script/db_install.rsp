@@ -178,7 +178,7 @@ oracle.install.db.isRACOneInstall=false
 #------------------------------------------------------------------------------
 # Specify the name for RAC One Node Service.
 #------------------------------------------------------------------------------
-oracle.install.db.racOneServiceName=
+#oracle.install.db.racOneServiceName=
 
 #------------------------------------------------------------------------------
 # Specify the type of database to create.
@@ -449,7 +449,7 @@ COLLECTOR_SUPPORTHUB_URL=
 #   - OFFLINE_UPDATES
 #   - SKIP_UPDATES
 #------------------------------------------------------------------------------
-oracle.installer.autoupdates.option=
+#oracle.installer.autoupdates.option=SKIP_UPDATES
 #------------------------------------------------------------------------------
 # In case MYORACLESUPPORT_DOWNLOAD option is chosen, specify the location where
 # the updates are to be downloaded.
