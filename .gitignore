@@ -59,6 +59,7 @@ uploads/
 *.rpm
 
 #Java
+target/
 *.class
 *.jar
 
@@ -66,3 +67,4 @@ uploads/
 __pycache__/
 
 #JavaScript
+node_modules/
