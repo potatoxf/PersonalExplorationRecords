@@ -1,0 +1,236 @@
+"==============================================================================
+"vim configuration for cilisi
+"github username for cilisi
+"==============================================================================
+"-----------------------------------------------------------------------------
+" < 判断操作系统是否是 Windows 还是 Linux >
+"-----------------------------------------------------------------------------
+let g:iswindows = 0
+if(has("win32") || has("win64") || has("win95") || has("win16"))
+	let g:iswindows = 1
+endif
+ 
+"-----------------------------------------------------------------------------
+" < 判断是终端还是 Gvim >
+"-----------------------------------------------------------------------------
+let g:isGUI = 0
+if has("gui_running")
+	let g:isGUI = 1
+endif
+"设置编码
+if iswindows
+	set encoding=utf-8
+	set fileencodings=utf-8,chinese,latin-1
+	set fileencoding=chinese
+	"解决菜单乱码
+	source $VIMRUNTIME/delmenu.vim
+	source $VIMRUNTIME/menu.vim
+	"解决consle输出乱码
+	language messages zh_CN.utf-8
+else
+	set fileencoding=utf-8
+endif
+"前导符号
+let mapleader=" "
+"兼容
+set nocompatible
+"设置自动保存
+set autowrite
+"识别不同的文件格式
+filetype on
+filetype indent on
+filetype plugin on
+filetype plugin indent on
+"设置鼠标可以控制
+set mouse=a
+"设置缩进
+set expandtab
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+set tw=0
+set indentexpr=
+set backspace=indent,eol,start
+set foldmethod=indent
+set foldlevel=99
+"光标移动到buffer的顶部和底部时保持几个行距离
+set scrolloff=5
+"设置打开后光标在上一次编辑位置
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\""| endif
+"语法高亮
+syntax on
+"设置行号
+set number
+"显示状态栏(默认值为 1, 无法显示状态栏)
+set laststatus=2
+"设置标尺
+set ruler
+"设置tab长度
+set tabstop=2
+"设置自动切换当前目录为当前文件所在的目录
+set autochdir
+"设置相对行号
+set relativenumber
+"设置当前行下线
+set cursorline
+"设置超出可显示区域换行
+set wrap
+"设置程序执行
+set showcmd
+"设置命令选择菜单
+set wildmenu
+"设置输入搜索内容时就显示搜索结果
+set incsearch
+"在执行命令前执行的命令
+exec "nohlsearch"
+"设置搜索时高亮显示被找到的文本
+set hlsearch
+"搜索时忽略大小写，但在有一个或以上大写字母时仍保持对大小写敏感
+set ignorecase smartcase
+"搜索之后向上跳转
+noremap = nzz
+"取消原来n键功能
+map n <nop>
+"搜索之后向下跳转
+noremap - Nzz
+"取消原来N键功能
+map n <nop>
+"将空格加回车改成取消当前高亮搜索
+noremap <LEADER><CR> :nohlsearch<CR>
+"保存
+map S :w<CR>
+"退出
+map Q :q<CR>
+"强制退出
+map <C-Q> :q!<CR>
+"向左分屏，光标在右
+map <C-L> :set splitright<CR>:vsplit<CR>
+"向右分屏，光标在左
+map <C-R> :set nosplitright<CR>:vsplit<CR>
+"向上分屏，光标在下
+map <C-T> :set splitbelow<CR>:split<CR>
+"向下分屏，光标在上
+map <C-B> :set nosplitbelow<CR>:split<CR>
+"更改切屏为空格加上下左右
+map <LEADER>l <C-W>l
+map <LEADER>h <C-W>h
+map <LEADER>j <C-W>j
+map <LEADER>k <C-W>k
+"水平分屏改垂直分屏
+map sv <C-W>t<C-W>H
+"垂直分屏改水平分屏
+map sh <C-W>t<C-W>K
+"改变分屏大小
+map <C-UP> :res +5<CR>
+map <C-DOWN> :res -5<CR>
+map <C-LEFT> :vertical resize-5<CR>
+map <C-RIGHT> :vertical resize+5<CR>
+"新建标签页
+map <C-T> :tabe<CR>
+"上一个标签页
+map <C-H> :-tabnext<CR>
+"下一个标签页
+map <C-L> :tabnext<CR>
+"刷新配置文件
+map R :source $MYVIMRC<CR>
+"==============================================================================
+"插件安装
+"==============================================================================
+if iswindows
+	"需要手动安装插件
+	call plug#begin('~/vimfiles/plugged')
+else
+"linux下自动安装vim-plug
+	if empty(glob('~/.vim/autoload/plug.vim'))
+	  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+	endif
+	call plug#begin('~/.vim/plugged')
+endif
+"Plug '插件名'
+"状态栏插件
+Plug 'vim-airline/vim-airline'
+"主题插件
+Plug 'connorholyday/vim-snazzy'
+"目录树插件
+Plug 'preservim/nerdtree'
+"git状态提示插件
+Plug 'Xuyuanp/nerdtree-git-plugin'
+"目录树标签页插件
+Plug 'jistr/vim-nerdtree-tabs'
+"git状态显示图标插件
+"Plug 'ryanoasis/vim-devicons'
+"代码提示插件
+"Plug 'ycm-core/YouCompleteMe'
+call plug#end()
+"==============================================================================
+"插件配置
+"==============================================================================
+"--------------------------------
+"Snazzy Configuration
+"--------------------------------
+"更换snazzy主题
+color snazzy
+"设置透明
+let g:SnazzyTransparent=1
+"--------------------------------
+"END Snazzy Configuration
+"--------------------------------
+"--------------------------------
+"NERDTree Configuration
+"--------------------------------
+"打开目录树
+map ff :NERDTreeToggle<CR>
+"显示行号
+let NERDTreeShowLineNumbers=1
+"自动居中
+let NERDTreeAutoCenter=1
+"是否显示隐藏文件
+let NERDTreeShowHidden=1
+"设置宽度
+let NERDTreeWinSize=30
+"在终端启动vim时，共享NERDTree
+let g:nerdtree_tabs_open_on_console_startup=1
+"忽略一下文件的显示
+let NERDTreeIgnore=['\.pyc','\~$','\.swp']
+"显示书签列表
+let NERDTreeShowBookmarks=1
+"vim不指定具体文件打开是，自动使用nerdtree
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+"当vim打开一个目录时，nerdtree自动使用
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+"当vim中没有其他文件，值剩下nerdtree的时候，自动关闭窗口
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+"改变nerdtree的箭头
+let g:NERDTreeDirArrowExpandable = '+'
+let g:NERDTreeDirArrowCollapsible = '-'
+"--------------------------------
+"END NERDTree Configuration
+"--------------------------------
+"--------------------------------
+"NERDTree-Git Configuration
+"--------------------------------
+let g:NERDTreeGitStatusIndicatorMapCustom = {
+\ 'New'       :'NEW',
+\ 'Modified'  :'MOD',
+\ 'Staged'    :'STA',
+\ 'Renamed'   :'REN',
+\ 'Unmerged'  :'UNM',
+\ 'Deleted'   :'DEL',
+\ 'Dirty'     :'DIR',
+\ 'Ignored'   :'IGN',
+\ 'Clean'     :'CLE',
+\ 'Untracked' :'_',
+\ 'Unknown'   :'_',
+\ }
+"you should install nerdfonts by yourself. default: 0
+let g:NERDTreeGitStatusUseNerdFonts = 0
+"a heavy feature may cost much more time. default: 0
+let g:NERDTreeGitStatusShowIgnored = 0
+"a heave feature too. default: normal
+let g:NERDTreeGitStatusUntrackedFilesMode = 'all'
+"--------------------------------
+"END NERDTree-Git Configuration
+"--------------------------------
