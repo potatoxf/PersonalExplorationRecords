@@ -4,11 +4,13 @@
 
 package com.github.potatoxf.catalytic.utils.reflect;
 
+import com.github.potatoxf.catalytic.utils.WordTokens;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 属性名
@@ -16,12 +18,10 @@ import java.util.List;
  * @author potatoxf
  */
 public final class AttributeName {
-    private final String[] attributePartNames;
-    private final int hash;
+    private final WordTokens wordTokens;
 
-    private AttributeName(String[] attributePartNames) {
-        this.attributePartNames = attributePartNames;
-        this.hash = Arrays.hashCode(attributePartNames);
+    private AttributeName(WordTokens wordTokens) {
+        this.wordTokens = wordTokens;
     }
 
     public static AttributeName ofMethod(Method input) {
@@ -55,94 +55,52 @@ public final class AttributeName {
         }
         parts.add(sb.toString());
         sb.setLength(0);
-        return new AttributeName(parts.stream().filter(s -> !s.isEmpty())
-                .map(String::toLowerCase).map(String::intern).toArray(String[]::new));
+        return new AttributeName(WordTokens.ofJava(input));
     }
 
     public String toUpperKebabCase() {
-        return this.toKebabCase(true);
+        return wordTokens.toUpperKebabCase();
     }
 
-    public String toUpperUnderline() {
-        return this.toUnderline(true);
+    public String toUpperUnderLine() {
+        return wordTokens.toUpperUnderLine();
     }
 
     public String toUpperCamelCase() {
-        return this.toCamelCase(true);
+        return wordTokens.toUpperCamelCase();
     }
 
     public String toLowerKebabCase() {
-        return this.toKebabCase(false);
+        return wordTokens.toLowerKebabCase();
     }
 
-    public String toLowerUnderline() {
-        return this.toUnderline(false);
+    public String toLowerUnderLine() {
+        return wordTokens.toLowerUnderLine();
     }
 
     public String toLowerCamelCase() {
-        return this.toCamelCase(false);
+        return wordTokens.toLowerCamelCase();
     }
 
     private String toKebabCase(boolean upper) {
-        String string = String.join("-", attributePartNames);
-        if (upper) string = string.toUpperCase();
-        return string;
-    }
-
-    private String toUnderline(boolean upper) {
-        String string = String.join("_", attributePartNames);
-        if (upper) string = string.toUpperCase();
-        return string;
-    }
-
-    private String toCamelCase(boolean upper) {
-        char c = attributePartNames[0].charAt(0);
-        if (upper) c = Character.toUpperCase(c);
-        if (attributePartNames.length == 1) {
-            if (attributePartNames[0].length() == 1) {
-                return String.valueOf(c);
-            } else {
-                return c + attributePartNames[0].substring(1);
-            }
-        } else {
-            StringBuilder sb = new StringBuilder();
-            if (attributePartNames[0].length() == 1) {
-                sb.append(c);
-            } else {
-                sb.append(c).append(attributePartNames[0], 1, attributePartNames[0].length());
-            }
-            for (int i = 1; i < attributePartNames.length; i++) {
-                c = attributePartNames[i].charAt(0);
-                c = Character.toUpperCase(c);
-                sb.append(c);
-                if (attributePartNames[i].length() > 1) {
-                    sb.append(attributePartNames[i], 1, attributePartNames[i].length());
-                }
-            }
-            return sb.toString();
-        }
+        return wordTokens.toLowerUnderLine();
     }
 
     @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (!(object instanceof AttributeName)) return false;
-        AttributeName that = (AttributeName) object;
-        int length = this.attributePartNames.length;
-        if (length != that.attributePartNames.length) return false;
-        for (int i = 0; i < length; i++) {
-            if (!attributePartNames[i].equals(that.attributePartNames[i])) return false;
-        }
-        return true;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AttributeName that = (AttributeName) o;
+        return Objects.equals(wordTokens, that.wordTokens);
     }
 
     @Override
     public int hashCode() {
-        return hash;
+        return Objects.hash(wordTokens);
     }
 
     @Override
     public String toString() {
-        return Arrays.toString(attributePartNames);
+        return wordTokens.toString();
     }
 }
