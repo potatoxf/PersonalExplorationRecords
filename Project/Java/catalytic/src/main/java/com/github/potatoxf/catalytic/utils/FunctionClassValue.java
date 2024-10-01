@@ -7,6 +7,8 @@ package com.github.potatoxf.catalytic.utils;
 import java.util.function.Function;
 
 /**
+ * lambda函数式类型值
+ *
  * @author potatoxf
  */
 public class FunctionClassValue<T> extends ClassValue<T> {

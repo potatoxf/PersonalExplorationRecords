@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2024.
+ */
+
 package com.github.potatoxf.catalytic.utils;
 
 import java.util.ArrayList;
@@ -209,10 +213,6 @@ public final class WordTokens {
             }
         }
         return sb.toString();
-    }
-
-    private char c(char c, boolean upper) {
-        return upper ? Character.toUpperCase(c) : Character.toLowerCase(c);
     }
 
     @Override
