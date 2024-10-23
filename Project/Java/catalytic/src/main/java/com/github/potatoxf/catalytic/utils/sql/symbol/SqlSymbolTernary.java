@@ -14,159 +14,151 @@ import java.util.List;
  */
 public abstract class SqlSymbolTernary extends SqlSymbol {
 
-    /**
-     * 打印关系条件
-     *
-     * @param name   名称
-     * @param value1 第一值
-     * @param value2 第二值
-     * @return 返回关系条件字符串
-     */
-    public final String print(String name, Number value1, Number value2) {
-        return print(SqlSymbol.DEFAULT_DATABASE, name, value1, value2);
+    protected SqlSymbolTernary(String defaultSymbol) {
+        super(defaultSymbol);
     }
 
     /**
      * 打印关系条件
      *
-     * @param database 数据库类型
-     * @param name     名称
-     * @param value1   第一值
-     * @param value2   第二值
+     * @param columnName 名称
+     * @param value1     第一值
+     * @param value2     第二值
      * @return 返回关系条件字符串
      */
-    public String print(String database, String name, Number value1, Number value2) {
-        return null;
+    public final String print(String columnName, Number value1, Number value2) {
+        return print(SqlSymbol.DEFAULT_DATABASE, columnName, value1, value2);
     }
 
     /**
      * 打印关系条件
      *
-     * @param name   名称
-     * @param value1 第一值
-     * @param value2 第二值
+     * @param database   数据库类型
+     * @param columnName 列名称
+     * @param value1     第一值
+     * @param value2     第二值
      * @return 返回关系条件字符串
      */
-    public final String print(String name, String value1, String value2) {
-        return print(SqlSymbol.DEFAULT_DATABASE, name, value1, value2);
+    public abstract String print(String database, String columnName, Number value1, Number value2);
+
+    /**
+     * 打印关系条件
+     *
+     * @param columnName 名称
+     * @param value1     第一值
+     * @param value2     第二值
+     * @return 返回关系条件字符串
+     */
+    public final String print(String columnName, String value1, String value2) {
+        return print(SqlSymbol.DEFAULT_DATABASE, columnName, value1, value2);
     }
 
     /**
      * 打印关系条件
      *
-     * @param database 数据库类型
-     * @param name     名称
-     * @param value1   第一值
-     * @param value2   第二值
+     * @param database   数据库类型
+     * @param columnName 列名称
+     * @param value1     第一值
+     * @param value2     第二值
      * @return 返回关系条件字符串
      */
-    public String print(String database, String name, String value1, String value2) {
-        return null;
+    public abstract String print(String database, String columnName, String value1, String value2);
+
+    /**
+     * 打印关系条件
+     *
+     * @param columnName 名称
+     * @param value1     第一值
+     * @param value2     第二值
+     * @return 返回关系条件字符串
+     */
+    public final String print(String columnName, Date value1, Date value2) {
+        return print(SqlSymbol.DEFAULT_DATABASE, columnName, value1, value2);
     }
 
     /**
      * 打印关系条件
      *
-     * @param name   名称
-     * @param value1 第一值
-     * @param value2 第二值
+     * @param database   数据库类型
+     * @param columnName 列名称
+     * @param value1     第一值
+     * @param value2     第二值
      * @return 返回关系条件字符串
      */
-    public final String print(String name, Date value1, Date value2) {
-        return print(SqlSymbol.DEFAULT_DATABASE, name, value1, value2);
+    public abstract String print(String database, String columnName, Date value1, Date value2);
+
+    /**
+     * 打印关系条件
+     *
+     * @param args       参数容器
+     * @param columnName 名称
+     * @param value1     第一值
+     * @param value2     第二值
+     * @return 返回关系条件字符串
+     */
+    public final String print(List<? super Object> args, String columnName, Number value1, Number value2) {
+        return print(SqlSymbol.DEFAULT_DATABASE, args, columnName, value1, value2);
     }
 
     /**
      * 打印关系条件
      *
-     * @param database 数据库类型
-     * @param name     名称
-     * @param value1   第一值
-     * @param value2   第二值
+     * @param database   数据库类型
+     * @param args       参数容器
+     * @param columnName 列名称
+     * @param value1     第一值
+     * @param value2     第二值
      * @return 返回关系条件字符串
      */
-    public String print(String database, String name, Date value1, Date value2) {
-        return null;
+    public abstract String print(String database, List<? super Object> args, String columnName, Number value1, Number value2);
+
+    /**
+     * 打印关系条件
+     *
+     * @param args       参数容器
+     * @param columnName 名称
+     * @param value1     第一值
+     * @param value2     第二值
+     * @return 返回关系条件字符串
+     */
+    public final String print(List<? super Object> args, String columnName, String value1, String value2) {
+        return print(SqlSymbol.DEFAULT_DATABASE, args, columnName, value1, value2);
     }
 
     /**
      * 打印关系条件
      *
-     * @param args   参数容器
-     * @param name   名称
-     * @param value1 第一值
-     * @param value2 第二值
+     * @param database   数据库类型
+     * @param args       参数容器
+     * @param columnName 列名称
+     * @param value1     第一值
+     * @param value2     第二值
      * @return 返回关系条件字符串
      */
-    public final String print(List<? super Object> args, String name, Number value1, Number value2) {
-        return print(SqlSymbol.DEFAULT_DATABASE, args, name, value1, value2);
+    public abstract String print(String database, List<? super Object> args, String columnName, String value1, String value2);
+
+    /**
+     * 打印关系条件
+     *
+     * @param args       参数容器
+     * @param columnName 名称
+     * @param value1     第一值
+     * @param value2     第二值
+     * @return 返回关系条件字符串
+     */
+    public final String print(List<? super Object> args, String columnName, Date value1, Date value2) {
+        return print(SqlSymbol.DEFAULT_DATABASE, args, columnName, value1, value2);
     }
 
     /**
      * 打印关系条件
      *
-     * @param database 数据库类型
-     * @param args     参数容器
-     * @param name     名称
-     * @param value1   第一值
-     * @param value2   第二值
+     * @param database   数据库类型
+     * @param args       参数容器
+     * @param columnName 列名称
+     * @param value1     第一值
+     * @param value2     第二值
      * @return 返回关系条件字符串
      */
-    public String print(String database, List<? super Object> args, String name, Number value1, Number value2) {
-        return null;
-    }
-
-    /**
-     * 打印关系条件
-     *
-     * @param args   参数容器
-     * @param name   名称
-     * @param value1 第一值
-     * @param value2 第二值
-     * @return 返回关系条件字符串
-     */
-    public final String print(List<? super Object> args, String name, String value1, String value2) {
-        return print(SqlSymbol.DEFAULT_DATABASE, args, name, value1, value2);
-    }
-
-    /**
-     * 打印关系条件
-     *
-     * @param database 数据库类型
-     * @param args     参数容器
-     * @param name     名称
-     * @param value1   第一值
-     * @param value2   第二值
-     * @return 返回关系条件字符串
-     */
-    public String print(String database, List<? super Object> args, String name, String value1, String value2) {
-        return null;
-    }
-
-    /**
-     * 打印关系条件
-     *
-     * @param args   参数容器
-     * @param name   名称
-     * @param value1 第一值
-     * @param value2 第二值
-     * @return 返回关系条件字符串
-     */
-    public final String print(List<? super Object> args, String name, Date value1, Date value2) {
-        return print(SqlSymbol.DEFAULT_DATABASE, args, name, value1, value2);
-    }
-
-    /**
-     * 打印关系条件
-     *
-     * @param database 数据库类型
-     * @param args     参数容器
-     * @param name     名称
-     * @param value1   第一值
-     * @param value2   第二值
-     * @return 返回关系条件字符串
-     */
-    public String print(String database, List<? super Object> args, String name, Date value1, Date value2) {
-        return null;
-    }
+    public abstract String print(String database, List<? super Object> args, String columnName, Date value1, Date value2);
 }
