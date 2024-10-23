@@ -11,6 +11,9 @@ package com.github.potatoxf.catalytic.utils.sql.symbol;
  */
 public abstract class SqlSymbol {
 
+    /**
+     * 默认数据库
+     */
     protected static final String DEFAULT_DATABASE = null;
 
     /**

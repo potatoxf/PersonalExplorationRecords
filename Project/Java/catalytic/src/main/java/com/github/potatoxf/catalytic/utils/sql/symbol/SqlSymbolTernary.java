@@ -98,7 +98,7 @@ public abstract class SqlSymbolTernary extends SqlSymbol {
      * @param value2 第二值
      * @return 返回关系条件字符串
      */
-    public final String print(List<? extends Object> args, String name, Number value1, Number value2) {
+    public final String print(List<? super Object> args, String name, Number value1, Number value2) {
         return print(SqlSymbol.DEFAULT_DATABASE, args, name, value1, value2);
     }
 
@@ -112,7 +112,7 @@ public abstract class SqlSymbolTernary extends SqlSymbol {
      * @param value2   第二值
      * @return 返回关系条件字符串
      */
-    public String print(String database, List<? extends Object> args, String name, Number value1, Number value2) {
+    public String print(String database, List<? super Object> args, String name, Number value1, Number value2) {
         return null;
     }
 
@@ -125,7 +125,7 @@ public abstract class SqlSymbolTernary extends SqlSymbol {
      * @param value2 第二值
      * @return 返回关系条件字符串
      */
-    public final String print(List<? extends Object> args, String name, String value1, String value2) {
+    public final String print(List<? super Object> args, String name, String value1, String value2) {
         return print(SqlSymbol.DEFAULT_DATABASE, args, name, value1, value2);
     }
 
@@ -139,7 +139,7 @@ public abstract class SqlSymbolTernary extends SqlSymbol {
      * @param value2   第二值
      * @return 返回关系条件字符串
      */
-    public String print(String database, List<? extends Object> args, String name, String value1, String value2) {
+    public String print(String database, List<? super Object> args, String name, String value1, String value2) {
         return null;
     }
 
@@ -152,7 +152,7 @@ public abstract class SqlSymbolTernary extends SqlSymbol {
      * @param value2 第二值
      * @return 返回关系条件字符串
      */
-    public final String print(List<? extends Object> args, String name, Date value1, Date value2) {
+    public final String print(List<? super Object> args, String name, Date value1, Date value2) {
         return print(SqlSymbol.DEFAULT_DATABASE, args, name, value1, value2);
     }
 
@@ -166,7 +166,7 @@ public abstract class SqlSymbolTernary extends SqlSymbol {
      * @param value2   第二值
      * @return 返回关系条件字符串
      */
-    public String print(String database, List<? extends Object> args, String name, Date value1, Date value2) {
+    public String print(String database, List<? super Object> args, String name, Date value1, Date value2) {
         return null;
     }
 }

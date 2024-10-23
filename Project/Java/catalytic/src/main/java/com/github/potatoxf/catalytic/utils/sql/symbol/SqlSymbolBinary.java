@@ -33,7 +33,7 @@ public abstract class SqlSymbolBinary extends SqlSymbol {
      * @return 返回关系条件字符串
      */
     public String print(String database, String name, Number value) {
-        return null;
+        return name + " " + symbol(database) + " " + value;
     }
 
     /**
@@ -56,7 +56,7 @@ public abstract class SqlSymbolBinary extends SqlSymbol {
      * @return 返回关系条件字符串
      */
     public String print(String database, String name, String value) {
-        return null;
+        return name + " " + symbol(database) + " " + value;
     }
 
     /**
@@ -79,7 +79,7 @@ public abstract class SqlSymbolBinary extends SqlSymbol {
      * @return 返回关系条件字符串
      */
     public String print(String database, String name, Date value) {
-        return null;
+        return name + " " + symbol(database) + " " + value;
     }
 
     /**
@@ -90,7 +90,7 @@ public abstract class SqlSymbolBinary extends SqlSymbol {
      * @param value 值
      * @return 返回关系条件字符串
      */
-    public final String print(List<? extends Object> args, String name, Number value) {
+    public final String print(List<? super Object> args, String name, Number value) {
         return print(SqlSymbol.DEFAULT_DATABASE, args, name, value);
     }
 
@@ -103,8 +103,9 @@ public abstract class SqlSymbolBinary extends SqlSymbol {
      * @param value    值
      * @return 返回关系条件字符串
      */
-    public String print(String database, List<? extends Object> args, String name, Number value) {
-        return null;
+    public String print(String database, List<? super Object> args, String name, Number value) {
+        args.add(value);
+        return name + " " + symbol(database) + " " + value;
     }
 
     /**
@@ -115,7 +116,7 @@ public abstract class SqlSymbolBinary extends SqlSymbol {
      * @param value 值
      * @return 返回关系条件字符串
      */
-    public final String print(List<? extends Object> args, String name, String value) {
+    public final String print(List<? super Object> args, String name, String value) {
         return print(SqlSymbol.DEFAULT_DATABASE, args, name, value);
     }
 
@@ -128,8 +129,9 @@ public abstract class SqlSymbolBinary extends SqlSymbol {
      * @param value    值
      * @return 返回关系条件字符串
      */
-    public String print(String database, List<? extends Object> args, String name, String value) {
-        return null;
+    public String print(String database, List<? super Object> args, String name, String value) {
+        args.add(value);
+        return name + " " + symbol(database) + " " + value;
     }
 
     /**
@@ -140,7 +142,7 @@ public abstract class SqlSymbolBinary extends SqlSymbol {
      * @param value 值
      * @return 返回关系条件字符串
      */
-    public final String print(List<? extends Object> args, String name, Date value) {
+    public final String print(List<? super Object> args, String name, Date value) {
         return print(SqlSymbol.DEFAULT_DATABASE, args, name, value);
     }
 
@@ -153,7 +155,8 @@ public abstract class SqlSymbolBinary extends SqlSymbol {
      * @param value    值
      * @return 返回关系条件字符串
      */
-    public String print(String database, List<? extends Object> args, String name, Date value) {
-        return null;
+    public String print(String database, List<? super Object> args, String name, Date value) {
+        args.add(value);
+        return name + " " + symbol(database) + " " + value;
     }
 }
