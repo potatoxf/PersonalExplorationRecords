@@ -2,7 +2,7 @@
  * Copyright (c) 2024.
  */
 
-package com.github.potatoxf.catalytic.utils.sql.symbol;
+package com.github.potatoxf.catalytic.utils.sql.condition;
 
 import java.util.Date;
 import java.util.List;
@@ -12,9 +12,9 @@ import java.util.List;
  *
  * @author potatoxf
  */
-public abstract class SqlSymbolTernary extends SqlSymbol {
+public abstract class SqlSymbolOfTernary extends SqlSymbol {
 
-    protected SqlSymbolTernary(String defaultSymbol) {
+    protected SqlSymbolOfTernary(String defaultSymbol) {
         super(defaultSymbol);
     }
 
@@ -63,29 +63,6 @@ public abstract class SqlSymbolTernary extends SqlSymbol {
      * @return 返回关系条件字符串
      */
     public abstract String print(String database, String columnName, String value1, String value2);
-
-    /**
-     * 打印关系条件
-     *
-     * @param columnName 名称
-     * @param value1     第一值
-     * @param value2     第二值
-     * @return 返回关系条件字符串
-     */
-    public final String print(String columnName, Date value1, Date value2) {
-        return print(SqlSymbol.DEFAULT_DATABASE, columnName, value1, value2);
-    }
-
-    /**
-     * 打印关系条件
-     *
-     * @param database   数据库类型
-     * @param columnName 列名称
-     * @param value1     第一值
-     * @param value2     第二值
-     * @return 返回关系条件字符串
-     */
-    public abstract String print(String database, String columnName, Date value1, Date value2);
 
     /**
      * 打印关系条件

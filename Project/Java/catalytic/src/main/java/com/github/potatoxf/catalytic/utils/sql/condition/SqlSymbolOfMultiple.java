@@ -2,22 +2,19 @@
  * Copyright (c) 2024.
  */
 
-package com.github.potatoxf.catalytic.utils.sql.symbol;
+package com.github.potatoxf.catalytic.utils.sql.condition;
 
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 /**
  * SQL三元符号，多个值
  *
  * @author potatoxf
  */
-public class SqlSymbolMultiple extends SqlSymbolBinary {
+public class SqlSymbolOfMultiple extends SqlSymbolOfBinary {
 
-    protected SqlSymbolMultiple(String defaultSymbol) {
+    protected SqlSymbolOfMultiple(String defaultSymbol) {
         super(defaultSymbol);
     }
 
@@ -41,7 +38,7 @@ public class SqlSymbolMultiple extends SqlSymbolBinary {
      * @return 返回关系条件字符串
      */
     public String print(String database, String columnName, Number... values) {
-        return handle(database, columnName, Arrays.stream(values).filter(Objects::nonNull).map(Object::toString).collect(Collectors.joining(",")));
+        return doPrint(database, null, columnName, values);
     }
 
     /**
@@ -64,30 +61,7 @@ public class SqlSymbolMultiple extends SqlSymbolBinary {
      * @return 返回关系条件字符串
      */
     public String print(String database, String columnName, String... values) {
-        return handle(database, columnName, Arrays.stream(values).filter(Objects::nonNull).map(o -> "'" + o + "'").collect(Collectors.joining(",")));
-    }
-
-    /**
-     * 打印关系条件
-     *
-     * @param columnName 列名称
-     * @param values     值
-     * @return 返回关系条件字符串
-     */
-    public final String print(String columnName, Date... values) {
-        return print(SqlSymbol.DEFAULT_DATABASE, columnName, values);
-    }
-
-    /**
-     * 打印关系条件
-     *
-     * @param database   数据库类型
-     * @param columnName 列名称
-     * @param values     值
-     * @return 返回关系条件字符串
-     */
-    public String print(String database, String columnName, Date... values) {
-        return handle(database, columnName, Arrays.stream(values).filter(Objects::nonNull).map(o -> "'" + o + "'").collect(Collectors.joining(",")));
+        return doPrint(database, null, columnName, values);
     }
 
     /**
@@ -112,7 +86,7 @@ public class SqlSymbolMultiple extends SqlSymbolBinary {
      * @return 返回关系条件字符串
      */
     public String print(String database, List<? super Object> args, String columnName, Number... values) {
-        return handle(database, args, columnName, Arrays.stream(values).filter(Objects::nonNull).collect(Collectors.toList()));
+        return doPrint(database, args, columnName, values);
     }
 
     /**
@@ -137,7 +111,7 @@ public class SqlSymbolMultiple extends SqlSymbolBinary {
      * @return 返回关系条件字符串
      */
     public String print(String database, List<? super Object> args, String columnName, String... values) {
-        return handle(database, args, columnName, Arrays.stream(values).filter(Objects::nonNull).collect(Collectors.toList()));
+        return doPrint(database, args, columnName, values);
     }
 
     /**
@@ -162,35 +136,15 @@ public class SqlSymbolMultiple extends SqlSymbolBinary {
      * @return 返回关系条件字符串
      */
     public String print(String database, List<? super Object> args, String columnName, Date... values) {
-        return handle(database, args, columnName, Arrays.stream(values).filter(Objects::nonNull).collect(Collectors.toList()));
-    }
-
-    protected String handle(String database, String columnName, String value) {
-        if (value.isEmpty()) {
-            return null;
-        } else {
-            return " " + columnName + " " + symbol(database) + " (" + value + ") ";
-        }
-    }
-
-    protected String handle(String database, List<? super Object> args, String columnName, List<? extends Object> list) {
-        if (list.isEmpty()) {
-            return null;
-        } else {
-            args.addAll(list);
-            String value = list.stream().map(o -> "?").collect(Collectors.joining(","));
-            return " " + columnName + " " + symbol(database) + " (" + value + ") ";
-        }
+        return doPrint(database, args, columnName, values);
     }
 
     @Override
-    protected String handle(String database, String columnName, Object value) {
-        return " " + legitimateColumnName(columnName) + " " + symbol(database) + " (" + value + ") ";
+    protected String doPrint(String database, List<? super Object> args, String columnName, Object value) {
+        return generateConditionExpressions(database, args, columnName, new Object[]{value});
     }
 
-    @Override
-    protected String handle(String database, List<? super Object> args, String columnName, Object value) {
-        args.add(value);
-        return " " + legitimateColumnName(columnName) + " " + symbol(database) + " (?) ";
+    protected String doPrint(String database, List<? super Object> args, String columnName, Object[] values) {
+        return generateConditionExpressions(database, args, columnName, values);
     }
 }

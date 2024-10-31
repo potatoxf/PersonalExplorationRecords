@@ -2,7 +2,7 @@
  * Copyright (c) 2024.
  */
 
-package com.github.potatoxf.catalytic.utils.sql.symbol;
+package com.github.potatoxf.catalytic.utils.sql.condition;
 
 import java.util.Date;
 import java.util.List;
@@ -12,9 +12,9 @@ import java.util.List;
  *
  * @author potatoxf
  */
-public class SqlSymbolBinary extends SqlSymbol {
+public class SqlSymbolOfBinary extends SqlSymbol {
 
-    protected SqlSymbolBinary(String defaultSymbol) {
+    protected SqlSymbolOfBinary(String defaultSymbol) {
         super(defaultSymbol);
     }
 
@@ -38,7 +38,7 @@ public class SqlSymbolBinary extends SqlSymbol {
      * @return 返回关系条件字符串
      */
     public String print(String database, String columnName, Number value) {
-        return handle(database, columnName, value);
+        return doPrint(database, null, columnName, value);
     }
 
     /**
@@ -61,30 +61,7 @@ public class SqlSymbolBinary extends SqlSymbol {
      * @return 返回关系条件字符串
      */
     public String print(String database, String columnName, String value) {
-        return handle(database, columnName, value);
-    }
-
-    /**
-     * 打印关系条件
-     *
-     * @param columnName 列名称
-     * @param value      值
-     * @return 返回关系条件字符串
-     */
-    public final String print(String columnName, Date value) {
-        return print(SqlSymbol.DEFAULT_DATABASE, columnName, value);
-    }
-
-    /**
-     * 打印关系条件
-     *
-     * @param database   数据库类型
-     * @param columnName 列名称
-     * @param value      值
-     * @return 返回关系条件字符串
-     */
-    public String print(String database, String columnName, Date value) {
-        return handle(database, columnName, value);
+        return doPrint(database, null, columnName, value);
     }
 
     /**
@@ -109,7 +86,7 @@ public class SqlSymbolBinary extends SqlSymbol {
      * @return 返回关系条件字符串
      */
     public String print(String database, List<? super Object> args, String columnName, Number value) {
-        return handle(database, args, columnName, value);
+        return doPrint(database, args, columnName, value);
     }
 
     /**
@@ -134,7 +111,7 @@ public class SqlSymbolBinary extends SqlSymbol {
      * @return 返回关系条件字符串
      */
     public String print(String database, List<? super Object> args, String columnName, String value) {
-        return handle(database, args, columnName, value);
+        return doPrint(database, args, columnName, value);
     }
 
     /**
@@ -159,15 +136,9 @@ public class SqlSymbolBinary extends SqlSymbol {
      * @return 返回关系条件字符串
      */
     public String print(String database, List<? super Object> args, String columnName, Date value) {
-        return handle(database, args, columnName, value);
+        return doPrint(database, args, columnName, value);
     }
-
-    protected String handle(String database, List<? super Object> args, String columnName, Object value) {
-        args.add(value);
-        return " " + legitimateColumnName(columnName) + " " + symbol(database) + " ? ";
-    }
-
-    protected String handle(String database, String columnName, Object value) {
-        return " " + legitimateColumnName(columnName) + " " + symbol(database) + " " + value + " ";
+    protected String doPrint(String database, List<? super Object> args, String columnName, Object value) {
+        return generateConditionExpression(database, args, columnName, value);
     }
 }

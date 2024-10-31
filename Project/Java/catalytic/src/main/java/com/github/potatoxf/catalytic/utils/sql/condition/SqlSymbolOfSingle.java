@@ -2,16 +2,16 @@
  * Copyright (c) 2024.
  */
 
-package com.github.potatoxf.catalytic.utils.sql.symbol;
+package com.github.potatoxf.catalytic.utils.sql.condition;
 
 /**
  * SQL符号,单元
  *
  * @author potatoxf
  */
-public class SqlSymbolSingle extends SqlSymbol {
+public class SqlSymbolOfSingle extends SqlSymbol {
 
-    protected SqlSymbolSingle(String defaultSymbol) {
+    protected SqlSymbolOfSingle(String defaultSymbol) {
         super(defaultSymbol);
     }
 
@@ -33,6 +33,6 @@ public class SqlSymbolSingle extends SqlSymbol {
      * @return 返回关系条件字符串
      */
     public String print(String database, String columnName) {
-        return " " + legitimateColumnName(columnName) + " " + symbol(database) + " ";
+        return generateConditionExpression(database, null, columnName, SqlSymbol.IGNORED_VALUE);
     }
 }
